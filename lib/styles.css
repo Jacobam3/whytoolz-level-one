@@ -1,0 +1,265 @@
+/* WhyToolz Test Suite Styling */
+
+:root {
+    --pass-green: #00d084;
+    --fail-red: #ff4757;
+    --bg-light: #fafafa;
+    --bg-dark: #2f3542;
+    --text-dark: #2f3542;
+    --text-light: #57606f;
+    --border-color: #dfe4ea;
+    --code-bg: #f1f2f6;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+h1 {
+    color: var(--text-dark);
+    margin: 0 0 30px 0;
+    font-size: 2.5em;
+    font-weight: 300;
+}
+
+h2 {
+    margin: 0 0 15px 0;
+    font-size: 1.8em;
+    font-weight: 400;
+}
+
+h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+/* Test Summary */
+.test-summary {
+    background: white;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid var(--pass-green);
+}
+
+.test-summary.summary-fail {
+    border-left-color: var(--fail-red);
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+.stat-passed {
+    color: var(--pass-green);
+    font-weight: 600;
+}
+
+.stat-failed {
+    color: var(--fail-red);
+    font-weight: 600;
+}
+
+.stat-total,
+.stat-rate {
+    color: var(--text-light);
+}
+
+/* Test Suite */
+.test-suite {
+    background: white;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.suite-title {
+    background: var(--bg-dark);
+    color: white;
+    padding: 15px 20px;
+    margin: 0;
+}
+
+.suite-stats {
+    padding: 10px 20px;
+    background: var(--bg-light);
+    font-size: 0.9em;
+    color: var(--text-light);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Test List */
+.test-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.test-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+
+.test-item:last-child {
+    border-bottom: none;
+}
+
+.test-item:hover {
+    background-color: var(--bg-light);
+}
+
+.test-passed {
+    background-color: rgba(0, 208, 132, 0.05);
+}
+
+.test-failed,
+.test-error {
+    background-color: rgba(255, 71, 87, 0.05);
+}
+
+.test-icon {
+    display: inline-block;
+    width: 25px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.test-passed .test-icon {
+    color: var(--pass-green);
+}
+
+.test-failed .test-icon,
+.test-error .test-icon {
+    color: var(--fail-red);
+}
+
+.test-description {
+    font-size: 1em;
+    color: var(--text-dark);
+}
+
+/* Error Display */
+.test-error {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #fff5f5;
+    border-left: 4px solid var(--fail-red);
+    border-radius: 4px;
+}
+
+.error-message {
+    color: var(--fail-red);
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 0.95em;
+}
+
+.error-trace {
+    background-color: var(--code-bg);
+    padding: 12px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85em;
+    line-height: 1.5;
+    color: #555;
+    margin: 0;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+    font-size: 1.2em;
+}
+
+.loading::after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--pass-green);
+    transition: width 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .test-summary {
+        padding: 20px;
+    }
+
+    .stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .test-item {
+        padding: 12px 15px;
+    }
+
+    .error-trace {
+        font-size: 0.75em;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+    }
+
+    .test-suite,
+    .test-summary {
+        box-shadow: none;
+        border: 1px solid var(--border-color);
+    }
+
+    .test-item {
+        page-break-inside: avoid;
+    }
+}

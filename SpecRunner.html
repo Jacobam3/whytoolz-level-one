@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhyToolz Test Suite</title>
+
+    <!-- PyScript CSS -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.10.2/core.css">
+
+    <!-- Custom Test Styles -->
+    <link rel="stylesheet" href="lib/styles.css">
+
+    <!-- PyScript JS -->
+    <script type="module" src="https://pyscript.net/releases/2024.10.2/core.js"></script>
+</head>
+<body>
+    <h1>WhyToolz Test Suite</h1>
+    <p style="color: #57606f; margin-bottom: 30px;">
+        Recreating PyToolz functions from scratch - A functional programming adventure in Python
+    </p>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="loading">
+        Loading Python environment and tests
+    </div>
+
+    <!-- Test results will be rendered here -->
+    <div id="test-results"></div>
+
+    <!-- PyScript Configuration -->
+    <py-config>
+        packages = []
+
+        [[fetch]]
+        files = ["src/whytoolz.py", "tests/test_framework.py", "tests/test_part1.py", "tests/test_part2.py", "tests/test_part3.py", "tests/test_advanced.py"]
+    </py-config>
+
+    <!-- Main Test Runner Script -->
+    <py-script>
+        import sys
+        from js import document
+
+        # Hide loading indicator
+        loading_el = document.getElementById("loading")
+        if loading_el:
+            loading_el.style.display = "none"
+
+        try:
+            # Import test framework
+            from tests.test_framework import TestRunner, get_runner
+
+            # Import test modules - they register themselves on import
+            test_modules = []
+
+            try:
+                from tests import test_part1
+                test_modules.append(test_part1)
+            except ImportError as ie:
+                print(f"test_part1 not found - skipping: {ie}")
+
+            try:
+                from tests import test_part2
+                test_modules.append(test_part2)
+            except ImportError as ie:
+                print(f"test_part2 not found - skipping: {ie}")
+
+            try:
+                from tests import test_part3
+                test_modules.append(test_part3)
+            except ImportError as ie:
+                print(f"test_part3 not found - skipping: {ie}")
+
+            try:
+                from tests import test_advanced
+                test_modules.append(test_advanced)
+            except ImportError as ie:
+                print(f"test_advanced not found - skipping: {ie}")
+
+            # Get the runner that tests registered with
+            runner = get_runner()
+
+            # Run all tests
+            if runner and runner.test_suites:
+                runner.run()
+                runner.display_results("test-results")
+            else:
+                # No tests found, show placeholder message
+                results_div = document.getElementById("test-results")
+                results_div.innerHTML = """
+                <div style="text-align: center; padding: 60px 20px; color: #57606f;">
+                    <h2>No tests found</h2>
+                    <p>Test files will appear here once they're created.</p>
+                    <p style="margin-top: 20px; font-size: 0.9em;">
+                        Expected test files: test_part1.py, test_part2.py, test_part3.py, test_advanced.py
+                    </p>
+                </div>
+                """
+
+        except Exception as e:
+            # Show error if something goes wrong
+            import traceback
+            error_name = type(e).__name__
+            error_msg = str(e)
+            error_trace = traceback.format_exc()
+
+            results_div = document.getElementById("test-results")
+            results_div.innerHTML = f"""
+            <div style="background: #fff5f5; padding: 30px; border-radius: 8px; border-left: 5px solid #ff4757;">
+                <h2 style="color: #ff4757; margin-top: 0;">Error Loading Tests</h2>
+                <p><strong>{error_name}:</strong> {error_msg}</p>
+                <pre style="background: #f1f2f6; padding: 15px; border-radius: 4px; overflow-x: auto;">
+{error_trace}</pre>
+            </div>
+            """
+    </py-script>
+</body>
+</html>
