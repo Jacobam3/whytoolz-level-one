@@ -36,7 +36,6 @@ def identity(x):
         >>> identity([1, 2, 3])
         [1, 2, 3]
     """
-    return x
     pass  # Replace with your implementation
 
 
@@ -60,7 +59,7 @@ def first(seq):
 
     Hint: How do you safely get the first element of any iterable?
     """
-    return seq[0]
+    pass
 
 
 def second(seq):
