@@ -40,8 +40,14 @@ PyToolz is used in real-world Python applications for data processing, analytics
 
 3. **Implement the functions:**
 
-   Edit `src/whytoolz.py` and implement each function. The file contains:
-   - Function signatures with type hints
+   Edit the appropriate part file and implement each function:
+   - `src/whytoolz_part1.py` - Foundation functions (start here!)
+   - `src/whytoolz_part2.py` - Sequence manipulation functions
+   - `src/whytoolz_part3.py` - Functions & dictionaries
+   - `src/whytoolz_advanced.py` - Advanced challenges (optional)
+
+   Each file contains:
+   - Function signatures (without type hints, for simplicity)
    - Detailed docstrings explaining what each function should do
    - Examples of expected behavior
    - Helpful hints
@@ -57,15 +63,18 @@ python/
 ├── SpecRunner.html         # Browser-based test runner (open this!)
 ├── README.md              # This file
 ├── src/
-│   └── whytoolz.py        # YOUR CODE GOES HERE
+│   ├── whytoolz_part1.py   # Part I: Foundation functions
+│   ├── whytoolz_part2.py   # Part II: Sequence Manipulation functions
+│   ├── whytoolz_part3.py   # Part III: Functions & Dictionaries
+│   └── whytoolz_advanced.py# Part IV: Advanced (Optional)
 ├── tests/
-│   ├── test_framework.py  # Custom test framework (don't modify)
-│   ├── test_part1.py      # Part I tests
-│   ├── test_part2.py      # Part II tests
-│   ├── test_part3.py      # Part III tests
-│   └── test_advanced.py   # Part IV tests
+│   ├── test_framework.py   # Custom test framework (don't modify)
+│   ├── test_part1.py       # Part I tests
+│   ├── test_part2.py       # Part II tests
+│   ├── test_part3.py       # Part III tests
+│   └── test_advanced.py    # Part IV tests
 └── lib/
-    └── styles.css         # Test runner styling
+    └── styles.css          # Test runner styling
 ```
 
 ## Learning Path
@@ -357,6 +366,6 @@ This project is for educational purposes.
 
 ---
 
-**Ready to start?** Open `src/whytoolz.py` and begin with `identity`!
+**Ready to start?** Open `src/whytoolz_part1.py` and begin with `identity`!
 
 **Happy coding!** 🐍✨
