@@ -4,22 +4,18 @@ WhyToolz Part II: Sequence Manipulation
 Great work getting through Part One!
 
 In this section, you'll implement functions that work with sequences
-and iterables in various ways: slicing, taking/dropping elements,
-combining sequences, and more.
+and iterables in various ways: slicing, dropping elements, combining
+sequences, extracting data, and more.
 
-In this EASY VERSION, your functions should RETURN CONCRETE LISTS OR VALUES,
-not generators. This makes them easier to understand and debug while you
-learn the algorithms.
+These functions return CONCRETE LISTS OR VALUES, not generators.
+This makes them easier to understand and debug while you learn the algorithms.
 
 Focus on:
 - Slicing and subsetting sequences
 - Working with iterables (anything you can loop over)
 - Combining and transforming sequences
 - Building reusable sequence operations
-
-Note for later: In the real PyToolz library and the advanced version,
-many of these functions return generators for memory efficiency. We'll
-explore that concept in Phase III!
+- Extracting data from collections
 
 See: https://toolz.readthedocs.io/en/latest/api.html#itertoolz
 """
@@ -59,36 +55,11 @@ def islice(seq, *args):
     pass
 
 
-def take(n, seq):
-    """
-    Return a list of the first n elements from a sequence.
-
-    Unlike first(), this returns a list of n elements.
-
-    Args:
-        n: Number of elements to take
-        seq: Input sequence
-
-    Returns:
-        List of the first n elements from seq
-
-    Example:
-        >>> take(3, [1, 2, 3, 4, 5])
-        [1, 2, 3]
-        >>> take(2, 'hello')
-        ['h', 'e']
-
-    Hint: Use islice to get the elements
-    """
-    pass
-
-
 def drop(n, seq):
     """
     Skip the first n elements and return the rest as a list.
 
-    This is the complement of take() - it discards n elements
-    and returns everything after.
+    Discards the first n elements and returns everything after.
 
     Args:
         n: Number of elements to skip
@@ -279,36 +250,6 @@ def accumulate(func, seq, initial=None):
         [1, 1, 2, 6, 24]
 
     Hint: Keep a running accumulator, collect results at each step
-    """
-    pass
-
-
-def iterate(func, x):
-    """
-    Create an iterator by repeatedly applying func to x.
-
-    Yields: x, func(x), func(func(x)), func(func(func(x))), ...
-
-    Note: In the real PyToolz, this returns a generator. We return a list for easier testing.
-
-    Args:
-        func: Function to repeatedly apply
-        x: Initial value
-
-    Note:
-        This function is special - it could create an infinite sequence!
-        In practice, you'll likely want to limit results (e.g., with take())
-
-    Returns:
-        List of repeated applications (or generator in advanced version)
-
-    Example:
-        >>> list(take(5, iterate(lambda x: x * 2, 1)))
-        [1, 2, 4, 8, 16]
-        >>> list(take(4, iterate(lambda x: x + 1, 0)))
-        [0, 1, 2, 3]
-
-    Hint: This is tricky! Consider how to generate values on demand.
     """
     pass
 

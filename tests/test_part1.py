@@ -2,7 +2,6 @@
 Part I Tests: Foundation - Working with Concrete Data Structures
 
 These tests cover basic functions that return concrete data (lists, dicts, values).
-No generators yet - we'll learn those in Part II!
 """
 
 from tests.test_framework import TestRunner
@@ -25,7 +24,7 @@ runner = get_runner() or create_runner()
 
 @runner.describe("Part I: Foundation Functions")
 def test_part1():
-    """Tests for basic non-generator functions"""
+    """Tests for foundation functions"""
 
     # ========================================================================
     # identity
@@ -110,10 +109,9 @@ def test_part1():
         def test_last_tuple():
             assert wt.last((10, 20, 30)) == 30
 
-        @runner.it("last should work on iterables (even if only iterable once)")
+        @runner.it("last should work on iterables")
         def test_last_iterable():
-            # This tests that last() can handle generators
-            assert wt.last(x for x in range(5)) == 4
+            assert wt.last(range(5)) == 4
 
     # ========================================================================
     # nth
@@ -153,10 +151,9 @@ def test_part1():
             assert wt.count('hello') == 5
             assert wt.count('') == 0
 
-        @runner.it("count should work on any iterable, including generators")
+        @runner.it("count should work on any iterable")
         def test_count_iterable():
             assert wt.count(range(10)) == 10
-            assert wt.count(x for x in range(5)) == 5
 
     # ========================================================================
     # frequencies

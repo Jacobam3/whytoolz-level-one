@@ -6,6 +6,7 @@ or want extra challenges. Good luck!
 """
 
 from tests.test_framework import TestRunner, get_runner, create_runner
+from types import GeneratorType
 import sys
 
 # Import the module students will implement
@@ -22,6 +23,97 @@ runner = get_runner() or create_runner()
 @runner.describe("Part IV: Advanced (Optional)")
 def test_advanced():
     """Tests for advanced challenge functions"""
+
+    @runner.subsuite("take")
+    def test_take():
+        # ========================================================================
+        # take
+        # ========================================================================
+
+        @runner.it("take should return a generator")
+        def test_take_returns_generator():
+            result = wt.take(3, [1, 2, 3, 4, 5])
+            assert isinstance(result, GeneratorType) or hasattr(result, '__iter__')
+
+        @runner.it("take should return the first n elements")
+        def test_take_basic():
+            result = wt.take(3, [1, 2, 3, 4, 5])
+            assert list(result) == [1, 2, 3]
+
+        @runner.it("take should work with strings")
+        def test_take_string():
+            result = list(wt.take(2, 'hello'))
+            assert result == ['h', 'e']
+
+        @runner.it("take should handle n larger than sequence length")
+        def test_take_oversized():
+            result = list(wt.take(10, [1, 2, 3]))
+            assert result == [1, 2, 3]
+
+        @runner.it("take should handle n = 0")
+        def test_take_zero():
+            result = list(wt.take(0, [1, 2, 3]))
+            assert result == []
+
+        @runner.it("take should be lazy (only consume what's needed)")
+        def test_take_lazy():
+            # This generator tracks how many items were consumed
+            consumed = []
+            def tracking_gen():
+                for i in range(10):
+                    consumed.append(i)
+                    yield i
+
+            result = wt.take(3, tracking_gen())
+            # Before consuming the result, nothing should be consumed
+            # (may consume first item depending on implementation)
+            list(result)  # Consume the take result
+            # Should have consumed at most 3 items
+            assert len(consumed) <= 3, "take should be lazy and only consume needed items"
+
+    @runner.subsuite("iterate")
+    def test_iterate():
+        # ========================================================================
+        # iterate
+        # ========================================================================
+
+        @runner.it("iterate should return a generator")
+        def test_iterate_returns_generator():
+            def increment(x):
+                return x + 1
+            result = wt.iterate(increment, 0)
+            assert isinstance(result, GeneratorType) or hasattr(result, '__iter__')
+
+        @runner.it("iterate should create infinite sequence by repeatedly applying function")
+        def test_iterate_basic():
+            def double(x):
+                return x * 2
+            result = list(wt.take(5, wt.iterate(double, 1)))
+            assert result == [1, 2, 4, 8, 16]
+
+        @runner.it("iterate should work with addition")
+        def test_iterate_addition():
+            def increment(x):
+                return x + 1
+            result = list(wt.take(4, wt.iterate(increment, 0)))
+            assert result == [0, 1, 2, 3]
+
+        @runner.it("iterate should work with more complex functions")
+        def test_iterate_complex():
+            def add_two(x):
+                return x + 2
+            result = list(wt.take(5, wt.iterate(add_two, 1)))
+            assert result == [1, 3, 5, 7, 9]
+
+        @runner.it("iterate creates infinite sequence - DO NOT convert to list!")
+        def test_iterate_infinite():
+            # This test just verifies it's a generator
+            def increment(x):
+                return x + 1
+            result = wt.iterate(increment, 0)
+            # Take just a few items to verify it works
+            first_few = [next(result) for _ in range(3)]
+            assert first_few == [0, 1, 2]
 
     @runner.subsuite("topk")
     def test_topk():

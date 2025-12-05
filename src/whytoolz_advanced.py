@@ -5,12 +5,65 @@ These functions are more complex and are meant for students who
 finish early or want extra challenges.
 
 These teach:
+- Generators and lazy evaluation (infinite sequences)
 - Advanced algorithms (heaps, SQL-like operations)
 - Complex function composition
 - Partial application
 
 Good luck!
 """
+
+
+def take(n, seq):
+    """
+    Return the first n elements from a sequence as a generator.
+
+    This is a lazy version that yields elements one at a time.
+    Unlike the list-based version, this doesn't consume the entire sequence upfront.
+
+    Args:
+        n: Number of elements to take
+        seq: Input sequence
+
+    Returns:
+        Generator yielding the first n elements from seq
+
+    Example:
+        >>> list(take(3, [1, 2, 3, 4, 5]))
+        [1, 2, 3]
+        >>> list(take(2, 'hello'))
+        ['h', 'e']
+
+    Hint: Use 'yield' and enumerate or a counter to track how many items yielded
+    """
+    pass
+
+
+def iterate(func, x):
+    """
+    Create an infinite iterator by repeatedly applying func to x.
+
+    Yields: x, func(x), func(func(x)), func(func(func(x))), ...
+
+    This is a generator function that creates INFINITE sequences.
+    You'll need to use take() or similar to limit the results.
+
+    Args:
+        func: Function to repeatedly apply
+        x: Initial value
+
+    Returns:
+        Generator yielding infinite sequence of applications
+
+    Example:
+        >>> list(take(5, iterate(lambda x: x * 2, 1)))
+        [1, 2, 4, 8, 16]
+        >>> list(take(4, iterate(lambda x: x + 1, 0)))
+        [0, 1, 2, 3]
+
+    Hint: Use 'yield' to create a generator. Loop forever!
+    """
+    pass
 
 
 def topk(k, seq):

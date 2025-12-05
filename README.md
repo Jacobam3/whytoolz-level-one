@@ -7,10 +7,11 @@ A functional programming kata for Python - recreating PyToolz functions from scr
 This project challenges you to reimplement functions from the **PyToolz** library, a functional standard library for Python. By building these functions yourself, you'll learn:
 
 - **Functional programming** patterns and principles
-- How to work with **iterators and generators** (lazy evaluation)
+- Working with **sequences and iterables**
 - **Higher-order functions** (functions that take/return functions)
 - How popular Python libraries work under the hood
 - **Immutable data structures** and pure functions
+- **Generators and lazy evaluation** (advanced section)
 
 PyToolz is used in real-world Python applications for data processing, analytics, and functional programming. Understanding how it works will make you a better Python developer!
 
@@ -94,21 +95,21 @@ Functions: `identity`, `first`, `second`, `last`, `nth`, `count`, `frequencies`,
 
 **Start here!** These functions return concrete values (lists, dicts, numbers), making them easier to understand and debug.
 
-### Part II: Sequences & Lazy Evaluation (12 functions)
+### Part II: Sequence Manipulation (11 functions)
 
-**Focus:** Working with generators (lazy iterators)
+**Focus:** Working with sequences and iterables
 
-Functions: `take`, `drop`, `tail`, `concat`, `unique`, `partition`, `interleave`, `pluck`, `accumulate`, `iterate`, `sliding_window`, `take_nth`
+Functions: `islice`, `drop`, `tail`, `concat`, `unique`, `partition`, `interleave`, `pluck`, `accumulate`, `sliding_window`, `take_nth`
 
 **You'll learn:**
-- What generators are and why they're useful
-- Using `yield` to create lazy iterators
-- Memory-efficient operations on large datasets
-- Working with infinite sequences!
+- Slicing and subsetting sequences
+- Combining and transforming collections
+- Extracting data from nested structures
+- Working with any iterable (lists, strings, ranges, etc.)
 
-**Important:** In real PyToolz, many Part I functions actually use generators! In this section, you'll learn why and how.
+**Note:** These functions return concrete lists/values, making them easier to understand and debug.
 
-### Part III: Functions & Dictionaries (13 functions)
+### Part III: Functions & Dictionaries (12 functions)
 
 **Focus:** Higher-order functions and immutable dictionary operations
 
@@ -122,13 +123,16 @@ Functions: `pipe`, `compose`, `complement`, `do`, `memoize`, `assoc`, `dissoc`, 
 
 **Level up:** These functions work with other functions as data!
 
-### Part IV: Advanced (4 functions - Optional)
+### Part IV: Advanced (6 functions - Optional)
 
-**Focus:** Complex algorithms and advanced patterns
+**Focus:** Generators, lazy evaluation, and advanced patterns
 
-Functions: `topk`, `reduceby`, `juxt`, `curry`
+Functions: `take`, `iterate`, `topk`, `reduceby`, `juxt`, `curry`
 
 **You'll learn:**
+- Generators and lazy evaluation with `yield`
+- Creating infinite sequences
+- Memory-efficient operations on large datasets
 - Using heaps for efficient algorithms
 - Simultaneous grouping and reduction
 - Partial function application
@@ -189,7 +193,7 @@ Your IDE can use these hints for autocomplete and error checking!
 
 ### Understanding Generators
 
-Generators are a key concept in Part II. Here's a quick primer:
+Generators are a key concept in Part IV (Advanced). Here's a quick primer:
 
 **Regular function (eager):**
 ```python
@@ -213,6 +217,8 @@ def get_numbers():
 - Only compute what you need
 
 To convert a generator to a list: `list(my_generator())`
+
+**Note:** Parts I-III use concrete lists/values. Part IV introduces generators for advanced lazy evaluation patterns.
 
 ### Common Python Patterns
 
@@ -322,7 +328,7 @@ AssertionError: Expected [1, 2, 3], but got [1, 2, 3, 4]
 ```
 AssertionError: Expected <class 'list'>, but got <class 'generator'>
 ```
-→ Part I functions should return lists. Part II functions should return generators. Check which part you're in!
+→ Parts I-III functions should return lists/concrete values. Part IV (Advanced) functions should return generators for lazy evaluation. Check which part you're in!
 
 ### Import errors?
 ```
