@@ -389,7 +389,7 @@ def test_part2():
         @runner.it("take_nth should work with n = 3")
         def test_take_nth_three():
             result = list(wt.take_nth(3, 'hello world'))
-            assert result == ['h', 'l', 'o', 'l']
+            assert result == ['h', 'l', 'w', 'l']
 
         @runner.it("take_nth should work with n = 1 (every element)")
         def test_take_nth_one():

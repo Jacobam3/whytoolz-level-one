@@ -332,8 +332,13 @@ def test_advanced():
                 return base ** exp
 
             curried = wt.curry(power)
-            square = curried(exp=2)  # Or however your curry handles kwargs
-            # This test is flexible based on implementation
+
+            # Test partial application with keyword argument
+            square = curried(exp=2)
+            assert square(3) == 9      # 3^2 = 9
+            assert square(5) == 25     # 5^2 = 25
+
+            # Test all arguments at once
             result = curried(3, 2)
             assert result == 9
 
