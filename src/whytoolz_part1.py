@@ -22,8 +22,6 @@ def identity(x):
     While this seems trivial, identity is useful as a default function
     when no transformation is needed.
 
-    PyToolz reference: toolz.functoolz.identity
-
     Args:
         x: Any value
 
@@ -42,8 +40,6 @@ def identity(x):
 def first(seq):
     """
     Return the first element of a sequence.
-
-    PyToolz reference: toolz.itertoolz.first
 
     Args:
         seq: Any iterable sequence
@@ -66,8 +62,6 @@ def second(seq):
     """
     Return the second element of a sequence.
 
-    PyToolz reference: toolz.itertoolz.second
-
     Args:
         seq: Any iterable sequence
 
@@ -86,8 +80,6 @@ def second(seq):
 def last(seq):
     """
     Return the last element of a sequence.
-
-    PyToolz reference: toolz.itertoolz.last
 
     Args:
         seq: Any iterable sequence
@@ -109,8 +101,6 @@ def last(seq):
 def nth(n, seq):
     """
     Return the nth element of a sequence (0-indexed).
-
-    PyToolz reference: toolz.itertoolz.nth
 
     Args:
         n: Index of element to retrieve (0-based)
@@ -138,8 +128,6 @@ def count(seq):
     Note: This exhausts the iterable! Unlike len(), this works on
     any iterable including generators.
 
-    PyToolz reference: toolz.itertoolz.count
-
     Args:
         seq: Any iterable
 
@@ -162,8 +150,6 @@ def frequencies(seq):
     Count the occurrences of each unique item in a sequence.
 
     Returns a dictionary mapping each unique item to its count.
-
-    PyToolz reference: toolz.itertoolz.frequencies
 
     Args:
         seq: Any iterable
@@ -188,8 +174,6 @@ def groupby(key, seq):
 
     Returns a dictionary where keys are the results of calling key(item)
     and values are lists of items that produced that key.
-
-    PyToolz reference: toolz.itertoolz.groupby
 
     Args:
         key: Function to compute grouping key for each item
@@ -216,8 +200,6 @@ def cons(el, seq):
     Returns a new list with el as the first element, followed by
     all elements from seq. The original sequence is not modified.
 
-    PyToolz reference: toolz.itertoolz.cons
-
     Args:
         el: Element to prepend
         seq: Sequence to prepend to
@@ -242,8 +224,6 @@ def merge(*dicts):
 
     Later dictionaries take precedence - if the same key appears
     in multiple dicts, the value from the rightmost dict wins.
-
-    PyToolz reference: toolz.dicttoolz.merge
 
     Args:
         *dicts: Variable number of dictionaries to merge

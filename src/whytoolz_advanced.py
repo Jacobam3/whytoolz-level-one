@@ -20,8 +20,6 @@ def topk(k, seq):
     Returns the top k elements in descending order.
     Uses a heap for efficiency.
 
-    PyToolz reference: toolz.itertoolz.topk
-
     Args:
         k: Number of elements to return
         seq: Input sequence
@@ -46,8 +44,6 @@ def reduceby(key, binop, seq, init):
 
     Like groupby() followed by reduce() on each group, but more efficient.
     Groups items by key function, then reduces each group using binop.
-
-    PyToolz reference: toolz.itertoolz.reduceby
 
     Args:
         key: Function to compute grouping key
@@ -75,8 +71,6 @@ def juxt(*funcs):
     Returns a function that, when called with x, returns a tuple of
     (func1(x), func2(x), func3(x), ...)
 
-    PyToolz reference: toolz.functoolz.juxt
-
     Args:
         *funcs: Functions to apply
 
@@ -100,8 +94,6 @@ def curry(func):
     Returns a curried version of func that can be called with fewer
     arguments than required, returning a new function that takes the
     remaining arguments.
-
-    PyToolz reference: toolz.functoolz.curry
 
     Args:
         func: Function to curry

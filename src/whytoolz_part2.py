@@ -65,8 +65,6 @@ def take(n, seq):
 
     Unlike first(), this returns a list of n elements.
 
-    PyToolz reference: toolz.itertoolz.take
-
     Args:
         n: Number of elements to take
         seq: Input sequence
@@ -91,8 +89,6 @@ def drop(n, seq):
 
     This is the complement of take() - it discards n elements
     and returns everything after.
-
-    PyToolz reference: toolz.itertoolz.drop
 
     Args:
         n: Number of elements to skip
@@ -120,8 +116,6 @@ def tail(n, seq):
     because we need to see the whole sequence to know what the
     last n elements are.
 
-    PyToolz reference: toolz.itertoolz.tail
-
     Args:
         n: Number of elements from the end
         seq: Input sequence
@@ -147,8 +141,6 @@ def concat(seqs):
     Takes an iterable of iterables and returns all elements
     from all sequences in order.
 
-    PyToolz reference: toolz.itertoolz.concat
-
     Args:
         seqs: An iterable of iterables
 
@@ -171,8 +163,6 @@ def unique(seq):
     Return unique elements from a sequence, preserving order.
 
     Only returns each distinct element once, in the order of first appearance.
-
-    PyToolz reference: toolz.itertoolz.unique
 
     Args:
         seq: Input sequence (possibly with duplicates)
@@ -199,8 +189,6 @@ def partition(n, seq):
     If the sequence length isn't divisible by n, the last partition
     will be shorter.
 
-    PyToolz reference: toolz.itertoolz.partition
-
     Args:
         n: Size of each partition
         seq: Input sequence
@@ -226,8 +214,6 @@ def interleave(seqs):
     Takes elements alternately from each sequence until all are exhausted.
     Shorter sequences are skipped once exhausted.
 
-    PyToolz reference: toolz.itertoolz.interleave
-
     Args:
         seqs: Multiple sequences to interleave
 
@@ -251,8 +237,6 @@ def pluck(key, seq):
 
     Returns the value of 'key' from each dictionary in seq.
     Useful for extracting a column from a list of records.
-
-    PyToolz reference: toolz.itertoolz.pluck
 
     Args:
         key: The key to extract from each dict
@@ -280,8 +264,6 @@ def accumulate(func, seq, initial=None):
     Like reduce(), but returns intermediate results at each step.
     This creates a list of running totals/accumulations.
 
-    PyToolz reference: toolz.itertoolz.accumulate (similar to itertools.accumulate)
-
     Args:
         func: Binary function to apply (takes two args, returns one)
         seq: Input sequence
@@ -308,8 +290,6 @@ def iterate(func, x):
     Yields: x, func(x), func(func(x)), func(func(func(x))), ...
 
     Note: In the real PyToolz, this returns a generator. We return a list for easier testing.
-
-    PyToolz reference: toolz.itertoolz.iterate
 
     Args:
         func: Function to repeatedly apply
@@ -340,8 +320,6 @@ def sliding_window(n, seq):
     Returns overlapping tuples of n consecutive elements.
     Each window slides one position from the previous.
 
-    PyToolz reference: toolz.itertoolz.sliding_window
-
     Args:
         n: Window size
         seq: Input sequence
@@ -365,8 +343,6 @@ def take_nth(n, seq):
     Return every nth element from a sequence.
 
     Takes elements at positions 0, n, 2n, 3n, ...
-
-    PyToolz reference: toolz.itertoolz.take_nth
 
     Args:
         n: Take every nth element

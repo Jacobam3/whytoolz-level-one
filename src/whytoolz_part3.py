@@ -28,8 +28,6 @@ def pipe(data, *funcs):
     Applies each function to the result of the previous function,
     starting with data. This is similar to the | operator in shells.
 
-    PyToolz reference: toolz.functoolz.pipe
-
     Args:
         data: Initial value
         *funcs: Functions to apply in order
@@ -43,7 +41,7 @@ def pipe(data, *funcs):
         >>> pipe([1, 2, 3], sum, lambda x: x * 2)
         12
 
-    Hint: Use a loop or functools.reduce
+    Hint: You could use a loop...
     """
     pass
 
@@ -54,8 +52,6 @@ def compose(*funcs):
 
     Returns a new function that applies funcs in reverse order.
     compose(f, g, h)(x) == f(g(h(x)))
-
-    PyToolz reference: toolz.functoolz.compose
 
     Args:
         *funcs: Functions to compose
@@ -81,8 +77,6 @@ def complement(func):
 
     Creates a new function that negates the result of func.
     Useful for creating opposite predicates.
-
-    PyToolz reference: toolz.functoolz.complement
 
     Args:
         func: A predicate function (returns bool)
@@ -110,8 +104,6 @@ def do(func, x):
     Useful for inserting side effects (like logging) into a pipeline
     without changing the data flow.
 
-    PyToolz reference: toolz.functoolz.do
-
     Args:
         func: Function to call for side effects
         x: Value to pass to func and return
@@ -138,8 +130,6 @@ def memoize(func):
     Returns a new function that caches results based on arguments.
     If called with the same arguments again, returns cached result
     instead of recomputing.
-
-    PyToolz reference: toolz.functoolz.memoize
 
     Args:
         func: Function to memoize
@@ -169,8 +159,6 @@ def assoc(d, key, value):
 
     Does NOT modify the original dictionary (immutable operation).
 
-    PyToolz reference: toolz.dicttoolz.assoc
-
     Args:
         d: Original dictionary
         key: Key to set
@@ -195,8 +183,6 @@ def dissoc(d, *keys):
     Return a new dictionary with specified keys removed.
 
     Does NOT modify the original dictionary (immutable operation).
-
-    PyToolz reference: toolz.dicttoolz.dissoc
 
     Args:
         d: Original dictionary
@@ -223,8 +209,6 @@ def valmap(func, d):
     Returns a new dictionary with transformed values.
     Keys remain unchanged.
 
-    PyToolz reference: toolz.dicttoolz.valmap
-
     Args:
         func: Function to apply to each value
         d: Original dictionary
@@ -249,8 +233,6 @@ def keymap(func, d):
 
     Returns a new dictionary with transformed keys.
     Values remain unchanged.
-
-    PyToolz reference: toolz.dicttoolz.keymap
 
     Args:
         func: Function to apply to each key
@@ -277,8 +259,6 @@ def valfilter(predicate, d):
     Returns a new dictionary containing only key-value pairs
     where predicate(value) is True.
 
-    PyToolz reference: toolz.dicttoolz.valfilter
-
     Args:
         predicate: Function to test each value
         d: Original dictionary
@@ -303,8 +283,6 @@ def get_in(keys, d, default=None):
 
     Traverses nested dicts following the path specified by keys.
     Returns default if any key in the path doesn't exist.
-
-    PyToolz reference: toolz.dicttoolz.get_in
 
     Args:
         keys: List of keys forming a path
@@ -333,8 +311,6 @@ def update_in(d, keys, func):
     Follows the path specified by keys, applies func to the value
     at that location, and returns a new nested dictionary with
     the updated value. The original dictionary is not modified.
-
-    PyToolz reference: toolz.dicttoolz.update_in
 
     Args:
         d: Nested dictionary
