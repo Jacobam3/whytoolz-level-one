@@ -69,7 +69,8 @@ python/
 │   ├── whytoolz_part3.py   # Part III: Functions & Dictionaries
 │   └── whytoolz_advanced.py# Part IV: Advanced (Optional)
 ├── tests/
-│   ├── test_framework.py   # Custom test framework (don't modify)
+│   ├── framework/
+│   │   └── test_framework.py   # Custom test framework (don't modify)
 │   ├── test_part1.py       # Part I tests
 │   ├── test_part2.py       # Part II tests
 │   ├── test_part3.py       # Part III tests

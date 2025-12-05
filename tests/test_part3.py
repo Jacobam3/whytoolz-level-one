@@ -5,7 +5,7 @@ These tests cover higher-order functions (functions that take/return functions)
 and immutable dictionary operations.
 """
 
-from tests.test_framework import TestRunner, get_runner, create_runner
+from tests.framework.test_framework import TestRunner, get_runner, create_runner
 import sys
 
 # Import the module students will implement

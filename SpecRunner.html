@@ -90,7 +90,7 @@
         packages = []
 
         [[fetch]]
-        files = ["src/__init__.py", "src/whytoolz_part1.py", "src/whytoolz_part2.py", "src/whytoolz_part3.py", "src/whytoolz_advanced.py", "tests/__init__.py", "tests/test_framework.py", "tests/test_part1.py", "tests/test_part2.py", "tests/test_part3.py", "tests/test_advanced.py"]
+        files = ["src/__init__.py", "src/whytoolz_part1.py", "src/whytoolz_part2.py", "src/whytoolz_part3.py", "src/whytoolz_advanced.py", "tests/__init__.py", "tests/framework/__init__.py", "tests/framework/test_framework.py", "tests/test_part1.py", "tests/test_part2.py", "tests/test_part3.py", "tests/test_advanced.py"]
     </py-config>
 
     <!-- Main Test Runner Script -->
@@ -117,7 +117,7 @@
             print(f"Cleared {len(modules_to_clear)} cached modules")
 
             # Import test framework
-            from tests.test_framework import TestRunner, get_runner
+            from tests.framework.test_framework import TestRunner, get_runner
 
             # Import test modules - they register themselves on import
             test_modules = []

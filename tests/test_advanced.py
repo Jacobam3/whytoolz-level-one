@@ -5,7 +5,7 @@ These are more complex functions for students who finish early
 or want extra challenges. Good luck!
 """
 
-from tests.test_framework import TestRunner, get_runner, create_runner
+from tests.framework.test_framework import TestRunner, get_runner, create_runner
 from types import GeneratorType
 import sys
 

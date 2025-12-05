@@ -4,7 +4,7 @@ Part I Tests: Foundation - Working with Concrete Data Structures
 These tests cover basic functions that return concrete data (lists, dicts, values).
 """
 
-from tests.test_framework import TestRunner
+from tests.framework.test_framework import TestRunner
 
 # Import the module students will implement
 try:
@@ -17,7 +17,7 @@ except ImportError:
     sys.modules['whytoolz_part1'] = wt
 
 # Get the global test runner
-from tests.test_framework import get_runner, create_runner
+from tests.framework.test_framework import get_runner, create_runner
 runner = get_runner() or create_runner()
 
 

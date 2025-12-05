@@ -4,7 +4,7 @@ Part II Tests: Sequence Manipulation - Working with Sequences
 These tests cover functions that work with sequences and return concrete lists.
 """
 
-from tests.test_framework import TestRunner, get_runner, create_runner
+from tests.framework.test_framework import TestRunner, get_runner, create_runner
 import sys
 
 # Import the module students will implement
