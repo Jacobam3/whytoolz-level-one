@@ -89,6 +89,75 @@ h3 {
     overflow: hidden;
 }
 
+/* Suite Toggle Button */
+.suite-toggle {
+    width: 100%;
+    background: var(--bg-dark);
+    color: white;
+    padding: 15px 20px;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: background-color 0.2s;
+}
+
+.suite-toggle:hover {
+    background: #1f2937;
+}
+
+.suite-toggle:active {
+    background: #111827;
+}
+
+.toggle-arrow {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    font-size: 1.1em;
+    transition: transform 0.2s;
+}
+
+.suite-title-inline {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 500;
+    flex: 1;
+    text-align: left;
+}
+
+.suite-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Suite Content - Collapse/Expand */
+.suite-content {
+    max-height: 10000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.suite-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.suite-content.expanded {
+    max-height: 10000px;
+    opacity: 1;
+}
+
 .suite-title {
     background: var(--bg-dark);
     color: white;
@@ -102,6 +171,82 @@ h3 {
     font-size: 0.9em;
     color: var(--text-light);
     border-bottom: 1px solid var(--border-color);
+}
+
+/* Test Subsuite (Function Groupings) */
+.test-subsuite {
+    background: var(--bg-light);
+    margin: 10px 15px;
+    border-radius: 6px;
+    border-left: 3px solid var(--border-color);
+    overflow: hidden;
+}
+
+.subsuite-toggle {
+    width: 100%;
+    background: transparent;
+    color: var(--text-dark);
+    padding: 12px 15px;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95em;
+    font-family: inherit;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.subsuite-toggle:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.subsuite-title-inline {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 500;
+    flex: 1;
+    text-align: left;
+}
+
+.subsuite-badge {
+    background: transparent;
+    color: var(--text-light);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Subsuite Content - Collapse/Expand */
+.subsuite-content {
+    max-height: 10000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.subsuite-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.subsuite-content.expanded {
+    max-height: 10000px;
+    opacity: 1;
+}
+
+/* Subsuite Status Styling */
+.subsuite-pass .subsuite-toggle {
+    border-left: 3px solid var(--pass-green);
+}
+
+.subsuite-fail .subsuite-toggle {
+    border-left: 3px solid var(--fail-red);
 }
 
 /* Test List */
@@ -165,10 +310,26 @@ h3 {
 }
 
 .error-message {
-    color: var(--fail-red);
-    font-weight: 600;
+    color: var(--text-dark);
+    font-weight: 500;
     margin-bottom: 10px;
     font-size: 0.95em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.6;
+}
+
+.error-message strong {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.error-message .assertion-line {
+    color: var(--fail-red);
+    font-weight: 600;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 71, 87, 0.2);
 }
 
 .error-trace {

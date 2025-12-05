@@ -13,6 +13,63 @@
 
     <!-- PyScript JS -->
     <script type="module" src="https://pyscript.net/releases/2024.10.2/core.js"></script>
+
+    <!-- Clear Pyodide Cache on Page Load -->
+    <script>
+        // Clear Pyodide's IndexedDB cache on every page load
+        // This ensures students always get fresh code without manual cache clearing
+        async function clearPyodideCache() {
+            try {
+                // Get all IndexedDB database names
+                const dbs = await window.indexedDB.databases();
+
+                // Delete all Pyodide-related databases
+                for (const db of dbs) {
+                    if (db.name && db.name.includes('pyodide')) {
+                        window.indexedDB.deleteDatabase(db.name);
+                        console.log(`Cleared Pyodide cache: ${db.name}`);
+                    }
+                }
+            } catch (err) {
+                // Silently fail if IndexedDB is not available or blocked
+                console.log('Note: Could not clear Pyodide cache (IndexedDB may be disabled)');
+            }
+        }
+
+        // Clear cache when page loads
+        clearPyodideCache();
+    </script>
+
+    <!-- Toggle Function for Suite Collapse/Expand -->
+    <script>
+        function toggleSuite(suiteId) {
+            // Find button by either data-suite-id or data-subsuite-id attribute
+            const button = document.querySelector(`[data-suite-id="${suiteId}"], [data-subsuite-id="${suiteId}"]`);
+            const content = document.getElementById(suiteId);
+
+            // Guard against null elements
+            if (!button || !content) {
+                console.error(`Could not find button or content for ${suiteId}`);
+                return;
+            }
+
+            const arrow = button.querySelector('.toggle-arrow');
+
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                content.classList.add('expanded');
+                button.classList.remove('collapsed');
+                button.classList.add('expanded');
+                arrow.textContent = '▼';
+            } else {
+                content.classList.add('collapsed');
+                content.classList.remove('expanded');
+                button.classList.add('collapsed');
+                button.classList.remove('expanded');
+                arrow.textContent = '▶';
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>WhyToolz Test Suite</h1>
@@ -33,12 +90,13 @@
         packages = []
 
         [[fetch]]
-        files = ["src/whytoolz.py", "tests/test_framework.py", "tests/test_part1.py", "tests/test_part2.py", "tests/test_part3.py", "tests/test_advanced.py"]
+        files = ["src/__init__.py", "src/whytoolz_part1.py", "src/whytoolz_part2.py", "src/whytoolz_part3.py", "src/whytoolz_advanced.py", "tests/__init__.py", "tests/framework/__init__.py", "tests/framework/test_framework.py", "tests/test_part1.py", "tests/test_part2.py", "tests/test_part3.py", "tests/test_advanced.py"]
     </py-config>
 
     <!-- Main Test Runner Script -->
-    <py-script>
+    <script type="py">
         import sys
+        import importlib
         from js import document
 
         # Hide loading indicator
@@ -47,8 +105,19 @@
             loading_el.style.display = "none"
 
         try:
+            # Clear all cached modules to force fresh imports
+            # This ensures changes to source files are picked up immediately
+            modules_to_clear = [
+                name for name in sys.modules.keys()
+                if name.startswith('src.') or name.startswith('tests.')
+            ]
+            for module_name in modules_to_clear:
+                del sys.modules[module_name]
+
+            print(f"Cleared {len(modules_to_clear)} cached modules")
+
             # Import test framework
-            from tests.test_framework import TestRunner, get_runner
+            from tests.framework.test_framework import TestRunner, get_runner
 
             # Import test modules - they register themselves on import
             test_modules = []
@@ -113,6 +182,6 @@
 {error_trace}</pre>
             </div>
             """
-    </py-script>
+    </script>
 </body>
 </html>
