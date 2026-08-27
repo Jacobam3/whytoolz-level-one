@@ -43,7 +43,11 @@ def pipe(data, *funcs):
 
     Hint: You could use a loop...
     """
-    pass
+    result = data
+    for func in funcs:
+        result = func(result)
+
+    return result
 
 
 def compose(*funcs):
@@ -68,7 +72,12 @@ def compose(*funcs):
 
     Hint: Return a function that calls each func in reverse order
     """
-    pass
+    def composed(date):
+        result = date
+        for func in reversed(funcs):
+            result = func(result)
+        return result
+    return composed
 
 
 def complement(func):
@@ -94,7 +103,9 @@ def complement(func):
 
     Hint: Return a function that calls func and negates the result
     """
-    pass
+    def opposite(*args, **kwargs):
+        return not func(*args, **kwargs)
+    return opposite
 
 
 def do(func, x):
@@ -120,7 +131,8 @@ def do(func, x):
 
     Hint: Call func(x), ignore result, return x
     """
-    pass
+    func(x)
+    return x
 
 
 def memoize(func):
@@ -150,7 +162,14 @@ def memoize(func):
 
     Hint: Use a dictionary to store {args: result} pairs
     """
-    pass
+    cache = {}
+
+    def memoized(*args):
+        if args not in cache:
+            cache[args] = func(*args)
+        return cache[args]
+
+    return memoized
 
 
 def assoc(d, key, value):
@@ -175,7 +194,9 @@ def assoc(d, key, value):
 
     Hint: Create a copy of d and add the key-value pair
     """
-    pass
+    result = d.copy()
+    result[key] = value
+    return result
 
 
 def dissoc(d, *keys):
@@ -199,7 +220,10 @@ def dissoc(d, *keys):
 
     Hint: Create a copy and remove keys, or use dict comprehension
     """
-    pass
+    result = d.copy()
+    for key in keys:
+        result.pop(key, None)  # Remove key if it exists, ignore if not
+    return result
 
 
 def valmap(func, d):
@@ -224,7 +248,11 @@ def valmap(func, d):
 
     Hint: Use dict comprehension
     """
-    pass
+    result = {}
+
+    for key, value in d.items():
+        result[key] = func(value)
+    return result
 
 
 def keymap(func, d):
@@ -249,7 +277,11 @@ def keymap(func, d):
 
     Hint: Use dict comprehension
     """
-    pass
+    result = {}
+
+    for key, value in d.items():
+        result[func(key)] = value
+    return result
 
 
 def valfilter(predicate, d):
@@ -274,7 +306,12 @@ def valfilter(predicate, d):
 
     Hint: Use dict comprehension with if clause
     """
-    pass
+    result = {}
+
+    for key, value in d.items():
+        if predicate(value):
+            result[key] = value
+    return result
 
 
 def get_in(keys, d, default=None):
@@ -301,7 +338,12 @@ def get_in(keys, d, default=None):
 
     Hint: Use a loop or recursion to traverse the path
     """
-    pass
+    result = d
+    for key in keys:
+        if not isinstance(result, dict) or key not in result:
+            return default
+        result = result[key]
+    return result
 
 
 def update_in(d, keys, func):
@@ -327,4 +369,11 @@ def update_in(d, keys, func):
 
     Hint: This is tricky! You need to recursively copy and update nested dicts
     """
-    pass
+    result = d.copy()
+    current = result
+    for key in keys[:-1]:
+        current[key] = current.get(key, {}).copy()
+        current = current[key]
+    last_key = keys[-1]
+    current[last_key] = func(current.get(last_key))
+    return result

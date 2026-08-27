@@ -21,7 +21,10 @@ See: https://toolz.readthedocs.io/en/latest/api.html#itertoolz
 """
 
 
-def islice(seq, *args):
+from unittest import result
+
+
+def islice(seq, *args): 
     """
     Slice a sequence and return a list of elements.
 
@@ -52,10 +55,23 @@ def islice(seq, *args):
     Hint: Parse the *args to determine start, stop, and step values,
           then iterate through the sequence collecting appropriate elements into a list.
     """
-    pass
+    if len(args) == 1:
+        start, stop, step = 0, args[0], 1
+    elif len(args) == 2:
+        start, stop = args
+        step = 1
+    elif len(args) == 3:
+        start, stop, step = args
 
+    result = []
+    for index, item in enumerate(seq):
+        if stop is not None and index >= stop:
+            break
+        if index >= start and (index - start) % step == 0:
+            result.append(item)
+    return result
 
-def drop(n, seq):
+def drop(n, seq): 
     """
     Skip the first n elements and return the rest as a list.
 
@@ -76,7 +92,7 @@ def drop(n, seq):
 
     Hint: Use islice with a start parameter
     """
-    pass
+    return islice(seq, n, None)
 
 
 def tail(n, seq):
@@ -102,7 +118,8 @@ def tail(n, seq):
 
     Hint: Use collections.deque with maxlen, or convert to list and slice
     """
-    pass
+    items = list(seq)
+    return items[-n:] if n > 0 else []
 
 
 def concat(seqs):
@@ -126,8 +143,13 @@ def concat(seqs):
 
     Hint: Nested loops to collect elements, or flatten the sequences
     """
-    pass
+    result = []
 
+    for seq in seqs:
+        for item in seq:
+            result.append(item)
+    return result
+    
 
 def unique(seq):
     """
@@ -149,7 +171,12 @@ def unique(seq):
 
     Hint: Keep a set of seen elements, only collect if not seen before
     """
-    pass
+    result = []
+
+    for item in seq:
+        if item not in result:
+            result.append(item)
+    return result
 
 
 def partition(n, seq):
@@ -175,7 +202,17 @@ def partition(n, seq):
 
     Hint: Use islice in a loop to grab n items at a time
     """
-    pass
+    result = []
+    chunk = []
+
+    for item in seq:
+        chunk.append(item)
+        if len(chunk) == n:
+            result.append(tuple(chunk))
+            chunk = []
+    if chunk:
+        result.append(tuple(chunk))
+    return result
 
 
 def interleave(seqs):
@@ -199,7 +236,19 @@ def interleave(seqs):
 
     Hint: Use zip_longest to handle sequences of different lengths
     """
-    pass
+    iterators = [iter(seq) for seq in seqs]
+    result = []
+
+    while iterators:
+        remaining_iterators = []
+        for it in iterators:
+            try:
+                result.append(next(it))
+                remaining_iterators.append(it)
+            except StopIteration:
+                pass
+            iterators = remaining_iterators
+    return result
 
 
 def pluck(key, seq):
@@ -225,7 +274,7 @@ def pluck(key, seq):
 
     Hint: Use a list comprehension to extract values
     """
-    pass
+    return [item[key] for item in seq]
 
 
 def accumulate(func, seq, initial=None):
@@ -251,7 +300,23 @@ def accumulate(func, seq, initial=None):
 
     Hint: Keep a running accumulator, collect results at each step
     """
-    pass
+    result = []
+    it = iter(seq)
+    if initial is not None:
+        acc = initial
+        result.append(acc)
+    else:
+        try:
+            acc = next(it)
+            result.append(acc)
+        except StopIteration:
+            return result
+
+    for item in it:
+        acc = func(acc, item)
+        result.append(acc)
+
+    return result
 
 
 def sliding_window(n, seq):
@@ -276,7 +341,11 @@ def sliding_window(n, seq):
 
     Hint: Use collections.deque with maxlen to maintain the window
     """
-    pass
+    items = list(seq)
+    result = []
+    for i in range(len(items) - n + 1):
+        result.append(tuple(items[i:i + n]))
+    return result
 
 
 def take_nth(n, seq):
@@ -300,4 +369,8 @@ def take_nth(n, seq):
 
     Hint: Use enumerate to track position, collect when position % n == 0
     """
-    pass
+    result = []
+    for index, item in enumerate(seq):
+        if index % n == 0:
+            result.append(item)
+    return result
